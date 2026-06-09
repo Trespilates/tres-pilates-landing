@@ -1,885 +1,867 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    body {background-color: #efe9de}
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #201e1c; -webkit-text-stroke: #201e1c; background-color: #b65b3a}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #201e1c; -webkit-text-stroke: #201e1c; background-color: #b65b3a; min-height: 15.0px}
-    span.s1 {font-kerning: none}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tres Pilates — Classical Pilates Studio, Finedon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#F2EDE4;
+  --charcoal:#2B2825;
+  --terracotta:#C4704A;
+  --sage:#7A8C72;
+  --cream:#EDE8DF;
+  --terra-light:#D4907A;
+}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--charcoal);font-weight:300;overflow-x:hidden}
+ 
+/* ── CURSOR (desktop) ── */
+.cursor{position:fixed;width:10px;height:10px;background:var(--terracotta);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid var(--terracotta);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s;opacity:.6}
+ 
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(242,237,228,.94);backdrop-filter:blur(10px);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 1px 24px rgba(43,40,37,.10)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--charcoal);text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;opacity:.7;transition:opacity .2s}
+.nav-links a:hover,.nav-links a.active{opacity:1}
+.nav-cta{background:var(--terracotta)!important;color:white!important;opacity:1!important;padding:10px 22px;letter-spacing:.1em;transition:background .25s!important}
+.nav-cta:hover{background:var(--charcoal)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--charcoal);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+ 
+/* ── MOBILE MENU ── */
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--ivory);z-index:190;flex-direction:column;justify-content:center;align-items:center;gap:32px;padding:80px 40px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,8vw,42px);font-weight:300;color:var(--charcoal);text-decoration:none;letter-spacing:.04em;transition:color .2s}
+.mobile-menu a:hover{color:var(--terracotta)}
+.mobile-menu .mob-book{background:var(--terracotta);color:white!important;padding:16px 40px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:400}
+.mob-close{position:absolute;top:24px;right:24px;font-size:28px;background:none;border:none;cursor:pointer;color:var(--charcoal);line-height:1}
+ 
+/* ── STICKY MOBILE CTA ── */
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--terracotta);color:white;text-align:center;padding:18px 24px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;box-shadow:0 -4px 20px rgba(43,40,37,.15);transition:background .25s}
+.sticky-cta:hover{background:var(--charcoal)}
+ 
+/* ── BUTTONS ── */
+.btn{display:inline-block;text-decoration:none;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:16px 32px;transition:all .25s;cursor:pointer;border:none}
+.btn-terra{background:var(--terracotta);color:white}
+.btn-terra:hover{background:var(--charcoal)}
+.btn-ghost{border:1px solid rgba(255,255,255,.5);color:white}
+.btn-ghost:hover{background:white;color:var(--charcoal);border-color:white}
+.btn-white{background:white;color:var(--terracotta)}
+.btn-white:hover{background:var(--charcoal);color:white}
+.btn-outline-white{border:1px solid rgba(255,255,255,.5);color:white}
+.btn-outline-white:hover{background:white;color:var(--terracotta)}
+.btn-outline{border:1px solid var(--charcoal);color:var(--charcoal)}
+.btn-outline:hover{background:var(--charcoal);color:white}
+ 
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+ 
+/* ── HERO ── */
+.hero{height:100svh;min-height:600px;position:relative;display:flex;align-items:center;overflow:hidden;background:var(--charcoal)}
+.hero-bg{position:absolute;inset:0;background:url('images/hero.jpg') center 30%/cover no-repeat}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(43,40,37,.75) 45%,rgba(43,40,37,.2) 100%)}
+.hero-content{position:relative;padding:0 80px;max-width:680px}
+.hero-eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--terra-light);margin-bottom:24px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,84px);font-weight:300;line-height:1.05;color:white;margin-bottom:28px}
+.hero h1 em{font-style:italic;color:var(--terra-light)}
+.hero-sub{font-size:15px;line-height:1.75;color:rgba(255,255,255,.75);max-width:440px;margin-bottom:36px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-trust{display:flex;gap:24px;flex-wrap:wrap;margin-top:36px;padding-top:32px;border-top:1px solid rgba(255,255,255,.18)}
+.trust-item{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em;display:flex;align-items:center;gap:7px}
+.trust-item::before{content:'✓';color:var(--terra-light);font-size:12px;flex-shrink:0}
+ 
+/* ── SECTION BASICS ── */
+section{padding:100px 48px}
+.inner{max-width:1200px;margin:0 auto}
+.label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}
+.title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:300;line-height:1.1}
+.title em{font-style:italic}
+ 
+/* ── PHILOSOPHY ── */
+.philosophy{background:var(--charcoal);color:white;padding:0}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr}
+.phil-text{padding:100px 80px 100px 80px;display:flex;flex-direction:column;justify-content:center}
+.phil-text .label{color:var(--terra-light)}
+.phil-text .title{color:white;margin-bottom:28px}
+.phil-text p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:18px}
+.phil-quote{font-family:'Cormorant Garamond',serif;font-size:23px;font-style:italic;color:var(--terra-light);border-left:2px solid var(--terracotta);padding-left:22px;margin:28px 0;line-height:1.5}
+.phil-img{background:url('images/studio-apparatus.jpg') center/cover no-repeat;min-height:560px}
+ 
+/* ── STATS ── */
+.stats{background:var(--terracotta);padding:44px 48px}
+.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:white;line-height:1}
+.stat-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:8px}
+ 
+/* ── IMAGE STRIP ── */
+.strip{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.strip-img{aspect-ratio:1;background:var(--cream);overflow:hidden}
+.strip-img img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s;display:block}
+.strip-img:hover img{transform:scale(1.06)}
+/* Placeholders when no image */
+.strip-img{background:var(--cream) center/cover no-repeat}
+ 
+/* ── CLASSES ── */
+.classes-intro{margin-bottom:56px}
+.classes-intro .title{margin-bottom:14px}
+.classes-intro p{font-size:15px;opacity:.65;max-width:480px;line-height:1.7}
+.classes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:56px}
+.class-card{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--cream)}
+.class-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s;display:block}
+.class-card:hover img{transform:scale(1.04)}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(43,40,37,.88) 45%,transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.card-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-light);margin-bottom:8px}
+.card-overlay h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:white;margin-bottom:8px;line-height:1.2}
+.card-overlay p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.7)}
+/* placeholder bg colors per card */
+.card-c1{background:#c8b4a4}
+.card-c2{background:#b0a898}
+.card-c3{background:#a8987e}
+.card-c4{background:#b4a490}
+.card-c5{background:#c0b0a0}
+.card-c6{background:#b8a898}
+ 
+.not-sure{background:var(--cream);padding:52px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.not-sure h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1.2;margin-bottom:14px}
+.not-sure h3 em{font-style:italic}
+.not-sure p{font-size:14px;line-height:1.75;opacity:.7;margin-bottom:28px}
+.not-sure-list{display:grid;gap:12px}
+.not-sure-list li{font-size:14px;line-height:1.65;opacity:.8;list-style:none;padding-left:20px;position:relative}
+.not-sure-list li::before{content:'✓';position:absolute;left:0;color:var(--terracotta)}
+ 
+/* ── GALLERY ROW ── */
+.gallery-row{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:0 48px;max-width:1296px;margin:0 auto 80px}
+.gal-img{overflow:hidden;background:var(--cream)}
+.gal-img img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-img:nth-child(1),.gal-img:nth-child(2),.gal-img:nth-child(4),.gal-img:nth-child(5){aspect-ratio:4/5}
+.gal-img:nth-child(3){aspect-ratio:4/6}
+ 
+/* ── TESTIMONIALS ── */
+.testimonials{background:var(--cream)}
+.testi-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:44px 48px 0;margin-top:8px}
+.testi-scroll::-webkit-scrollbar{display:none}
+.testi-track{display:grid;grid-template-columns:repeat(4,340px);gap:20px;padding:4px 2px}
+.testi-card{background:white;padding:36px 32px;display:flex;flex-direction:column}
+.testi-stars{color:var(--terracotta);font-size:13px;letter-spacing:3px;margin-bottom:16px}
+.testi-quote{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.65;color:var(--charcoal);margin-bottom:20px;flex:1}
+.testi-author{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta)}
+.testi-detail{font-size:12px;opacity:.5;margin-top:3px;letter-spacing:.04em}
+.testi-footer{text-align:center;margin-top:40px}
+.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:28px}
+.testi-dots span{width:6px;height:6px;border-radius:50%;background:rgba(43,40,37,.2);cursor:pointer;transition:background .2s,width .3s}
+.testi-dots span.active{background:var(--terracotta);width:20px;border-radius:3px}
+ 
+/* ── STUDIO ── */
+.studio-wrap{display:grid;grid-template-columns:1fr 1fr}
+.studio-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:300px 300px;gap:3px}
+.studio-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+/* placeholder */
+.s-ph{background:var(--cream)}
+.s-ph-1{background:#c4b8a8}
+.s-ph-2{background:#b8ac9c}
+.s-ph-3{background:#ccbfaf}
+.s-ph-4{background:#bfb3a3}
+.studio-info{background:var(--charcoal);color:white;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
+.studio-info .label{color:var(--terra-light)}
+.studio-info .title{color:white;margin-bottom:28px}
+.studio-info p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.72);margin-bottom:18px}
+.studio-callout{background:var(--terracotta);padding:20px 24px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:white;line-height:1.5}
+.equip-list{list-style:none;display:grid;gap:10px;margin-top:20px}
+.equip-list li{font-size:13px;color:rgba(255,255,255,.72);display:flex;gap:10px}
+.equip-list li::before{content:'—';color:var(--terracotta);flex-shrink:0}
+ 
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}
+.price-card{background:var(--cream);padding:40px 32px;display:flex;flex-direction:column}
+.price-card.featured{background:var(--charcoal);color:white}
+.price-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:12px}
+.price-card.featured .price-tag{color:var(--terra-light)}
+.price-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:8px;line-height:1.2}
+.price-card.featured .price-name{color:white}
+.price-amount{font-size:40px;font-weight:300;letter-spacing:-.01em;margin-bottom:6px}
+.price-card.featured .price-amount{color:white}
+.price-detail{font-size:12px;opacity:.6;margin-bottom:24px;line-height:1.5}
+.price-features{list-style:none;display:grid;gap:8px;margin-bottom:32px;flex:1}
+.price-features li{font-size:13px;display:flex;gap:10px}
+.price-features li::before{content:'✓';color:var(--terracotta);flex-shrink:0}
+.price-card.featured .price-features li{color:rgba(255,255,255,.8)}
+.price-card.featured .price-features li::before{color:var(--terra-light)}
+.price-duo-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px}
+.price-duo-row .price-card{background:var(--cream)}
+ 
+/* ── CTA BAND ── */
+.cta-band{background:var(--terracotta);padding:90px 48px;text-align:center}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:white;margin-bottom:16px;line-height:1.1}
+.cta-band h2 em{font-style:italic}
+.cta-band p{font-size:15px;color:rgba(255,255,255,.8);max-width:500px;margin:0 auto 40px}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+ 
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info h3{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:28px;line-height:1.2}
+.contact-info h3 em{font-style:italic}
+.c-item{margin-bottom:22px}
+.c-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:5px}
+.c-text{font-size:14px;line-height:1.65;opacity:.78}
+.c-text a{color:var(--terracotta);text-decoration:none}
+.map{height:280px;background:var(--cream);margin-top:28px;overflow:hidden}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.contact-form{display:flex;flex-direction:column;gap:0}
+.contact-form h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:28px;line-height:1.3}
+.contact-form input,
+.contact-form select,
+.contact-form textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(43,40,37,.2);padding:14px 0;font-family:'Jost',sans-serif;font-size:14px;color:var(--charcoal);margin-bottom:18px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{border-bottom-color:var(--terracotta)}
+.contact-form textarea{height:100px;resize:none}
+.contact-form select{cursor:pointer;background:transparent}
+.form-submit{background:var(--terracotta);color:white;border:none;padding:16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .25s;width:100%;margin-top:6px}
+.form-submit:hover{background:var(--charcoal)}
+ 
+/* ── FOOTER ── */
+footer{background:var(--charcoal);color:white;padding:64px 48px 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;max-width:1200px;margin:0 auto 48px}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.f-tagline{font-size:13px;opacity:.55;line-height:1.7;max-width:260px}
+.f-address{font-size:12px;opacity:.45;margin-top:14px;line-height:1.65}
+.f-col h4{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}
+.f-col ul{list-style:none;display:grid;gap:10px}
+.f-col a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.f-col a:hover{color:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.f-copy{font-size:12px;opacity:.38}
+.f-social{display:flex;gap:20px}
+.f-social a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.f-social a:hover{color:white}
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .phil-text{padding:80px 48px}
+  .studio-info{padding:64px 48px}
+}
+@media(max-width:900px){
+  .classes-grid{grid-template-columns:1fr 1fr}
+  .phil-grid{grid-template-columns:1fr}
+  .phil-img{min-height:380px}
+  .phil-text{padding:64px 48px}
+  .not-sure{grid-template-columns:1fr}
+  .studio-wrap{grid-template-columns:1fr}
+  .studio-imgs{grid-template-rows:240px 240px}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:768px){
+  html{scroll-padding-top:64px}
+  nav{padding:16px 20px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .sticky-cta{display:block}
+  body{padding-bottom:62px}
+  section{padding:64px 20px}
+  .hero-content{padding:0 24px;max-width:100%}
+  .hero h1{font-size:clamp(38px,11vw,60px)}
+  .hero-sub{font-size:14px;max-width:100%}
+  .hero-ctas{flex-direction:column;gap:12px}
+  .hero-ctas a{text-align:center;padding:16px 20px}
+  .hero-trust{gap:14px;margin-top:24px;padding-top:24px}
+  .trust-item{font-size:11px}
+  .stats{padding:32px 20px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:28px}
+  .stat-n{font-size:40px}
+  .strip{grid-template-columns:repeat(3,1fr)}
+  .classes-grid{grid-template-columns:1fr}
+  .class-card{aspect-ratio:4/3}
+  .not-sure{padding:36px 24px;gap:32px}
+  .gallery-row{grid-template-columns:repeat(2,1fr);padding:0 20px}
+  .gallery-row .gal-img:nth-child(3){display:none}
+  .testi-scroll{padding:40px 20px 0}
+  .testi-track{grid-template-columns:repeat(4,86vw)}
+  .studio-imgs{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px}
+  .studio-info{padding:52px 24px}
+  .pricing-grid{grid-template-columns:1fr}
+  .price-duo-row{grid-template-columns:1fr}
+  .cta-band{padding:64px 20px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .cta-btns a{width:100%;max-width:340px;text-align:center}
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .map{height:220px}
+  .footer-grid{grid-template-columns:1fr;gap:36px}
+  footer{padding:52px 20px 80px}
+  .footer-bottom{flex-direction:column;gap:14px;text-align:center}
+  .f-social{justify-content:center}
+}
+@media(max-width:480px){
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:clamp(34px,12vw,50px)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .phil-text{padding:52px 24px}
+}
+</style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;title&gt;Tres Pilates — Classical Pilates Studio, Finedon&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</span></p>
-<p class="p1"><span class="s1">&lt;link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;style&gt;</span></p>
-<p class="p1"><span class="s1">*{box-sizing:border-box;margin:0;padding:0}</span></p>
-<p class="p1"><span class="s1">:root{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--ivory:#F2EDE4;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--charcoal:#2B2825;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--terracotta:#C4704A;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--sage:#7A8C72;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--cream:#EDE8DF;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--terra-light:#D4907A;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">html{scroll-behavior:smooth;scroll-padding-top:72px}</span></p>
-<p class="p1"><span class="s1">body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--charcoal);font-weight:300;overflow-x:hidden}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── CURSOR (desktop) ── */</span></p>
-<p class="p1"><span class="s1">.cursor{position:fixed;width:10px;height:10px;background:var(--terracotta);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}</span></p>
-<p class="p1"><span class="s1">.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid var(--terracotta);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s;opacity:.6}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── NAV ── */</span></p>
-<p class="p1"><span class="s1">nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(242,237,228,.94);backdrop-filter:blur(10px);transition:box-shadow .3s}</span></p>
-<p class="p1"><span class="s1">nav.scrolled{box-shadow:0 1px 24px rgba(43,40,37,.10)}</span></p>
-<p class="p1"><span class="s1">.logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--charcoal);text-decoration:none}</span></p>
-<p class="p1"><span class="s1">.nav-links{display:flex;gap:36px;list-style:none;align-items:center}</span></p>
-<p class="p1"><span class="s1">.nav-links a{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;opacity:.7;transition:opacity .2s}</span></p>
-<p class="p1"><span class="s1">.nav-links a:hover,.nav-links a.active{opacity:1}</span></p>
-<p class="p1"><span class="s1">.nav-cta{background:var(--terracotta)!important;color:white!important;opacity:1!important;padding:10px 22px;letter-spacing:.1em;transition:background .25s!important}</span></p>
-<p class="p1"><span class="s1">.nav-cta:hover{background:var(--charcoal)!important}</span></p>
-<p class="p1"><span class="s1">.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}</span></p>
-<p class="p1"><span class="s1">.hamburger span{display:block;width:22px;height:1.5px;background:var(--charcoal);transition:all .3s}</span></p>
-<p class="p1"><span class="s1">.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}</span></p>
-<p class="p1"><span class="s1">.hamburger.open span:nth-child(2){opacity:0}</span></p>
-<p class="p1"><span class="s1">.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── MOBILE MENU ── */</span></p>
-<p class="p1"><span class="s1">.mobile-menu{display:none;position:fixed;inset:0;background:var(--ivory);z-index:190;flex-direction:column;justify-content:center;align-items:center;gap:32px;padding:80px 40px}</span></p>
-<p class="p1"><span class="s1">.mobile-menu.open{display:flex}</span></p>
-<p class="p1"><span class="s1">.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,8vw,42px);font-weight:300;color:var(--charcoal);text-decoration:none;letter-spacing:.04em;transition:color .2s}</span></p>
-<p class="p1"><span class="s1">.mobile-menu a:hover{color:var(--terracotta)}</span></p>
-<p class="p1"><span class="s1">.mobile-menu .mob-book{background:var(--terracotta);color:white!important;padding:16px 40px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:400}</span></p>
-<p class="p1"><span class="s1">.mob-close{position:absolute;top:24px;right:24px;font-size:28px;background:none;border:none;cursor:pointer;color:var(--charcoal);line-height:1}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── STICKY MOBILE CTA ── */</span></p>
-<p class="p1"><span class="s1">.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--terracotta);color:white;text-align:center;padding:18px 24px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;box-shadow:0 -4px 20px rgba(43,40,37,.15);transition:background .25s}</span></p>
-<p class="p1"><span class="s1">.sticky-cta:hover{background:var(--charcoal)}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── BUTTONS ── */</span></p>
-<p class="p1"><span class="s1">.btn{display:inline-block;text-decoration:none;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:16px 32px;transition:all .25s;cursor:pointer;border:none}</span></p>
-<p class="p1"><span class="s1">.btn-terra{background:var(--terracotta);color:white}</span></p>
-<p class="p1"><span class="s1">.btn-terra:hover{background:var(--charcoal)}</span></p>
-<p class="p1"><span class="s1">.btn-ghost{border:1px solid rgba(255,255,255,.5);color:white}</span></p>
-<p class="p1"><span class="s1">.btn-ghost:hover{background:white;color:var(--charcoal);border-color:white}</span></p>
-<p class="p1"><span class="s1">.btn-white{background:white;color:var(--terracotta)}</span></p>
-<p class="p1"><span class="s1">.btn-white:hover{background:var(--charcoal);color:white}</span></p>
-<p class="p1"><span class="s1">.btn-outline-white{border:1px solid rgba(255,255,255,.5);color:white}</span></p>
-<p class="p1"><span class="s1">.btn-outline-white:hover{background:white;color:var(--terracotta)}</span></p>
-<p class="p1"><span class="s1">.btn-outline{border:1px solid var(--charcoal);color:var(--charcoal)}</span></p>
-<p class="p1"><span class="s1">.btn-outline:hover{background:var(--charcoal);color:white}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── REVEAL ── */</span></p>
-<p class="p1"><span class="s1">.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}</span></p>
-<p class="p1"><span class="s1">.reveal.visible{opacity:1;transform:none}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── HERO ── */</span></p>
-<p class="p1"><span class="s1">.hero{height:100svh;min-height:600px;position:relative;display:flex;align-items:center;overflow:hidden;background:var(--charcoal)}</span></p>
-<p class="p1"><span class="s1">.hero-bg{position:absolute;inset:0;background:url('images/hero.jpg') center 30%/cover no-repeat}</span></p>
-<p class="p1"><span class="s1">.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(43,40,37,.75) 45%,rgba(43,40,37,.2) 100%)}</span></p>
-<p class="p1"><span class="s1">.hero-content{position:relative;padding:0 80px;max-width:680px}</span></p>
-<p class="p1"><span class="s1">.hero-eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--terra-light);margin-bottom:24px}</span></p>
-<p class="p1"><span class="s1">.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,84px);font-weight:300;line-height:1.05;color:white;margin-bottom:28px}</span></p>
-<p class="p1"><span class="s1">.hero h1 em{font-style:italic;color:var(--terra-light)}</span></p>
-<p class="p1"><span class="s1">.hero-sub{font-size:15px;line-height:1.75;color:rgba(255,255,255,.75);max-width:440px;margin-bottom:36px}</span></p>
-<p class="p1"><span class="s1">.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}</span></p>
-<p class="p1"><span class="s1">.hero-trust{display:flex;gap:24px;flex-wrap:wrap;margin-top:36px;padding-top:32px;border-top:1px solid rgba(255,255,255,.18)}</span></p>
-<p class="p1"><span class="s1">.trust-item{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em;display:flex;align-items:center;gap:7px}</span></p>
-<p class="p1"><span class="s1">.trust-item::before{content:'✓';color:var(--terra-light);font-size:12px;flex-shrink:0}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── SECTION BASICS ── */</span></p>
-<p class="p1"><span class="s1">section{padding:100px 48px}</span></p>
-<p class="p1"><span class="s1">.inner{max-width:1200px;margin:0 auto}</span></p>
-<p class="p1"><span class="s1">.label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}</span></p>
-<p class="p1"><span class="s1">.title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:300;line-height:1.1}</span></p>
-<p class="p1"><span class="s1">.title em{font-style:italic}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── PHILOSOPHY ── */</span></p>
-<p class="p1"><span class="s1">.philosophy{background:var(--charcoal);color:white;padding:0}</span></p>
-<p class="p1"><span class="s1">.phil-grid{display:grid;grid-template-columns:1fr 1fr}</span></p>
-<p class="p1"><span class="s1">.phil-text{padding:100px 80px 100px 80px;display:flex;flex-direction:column;justify-content:center}</span></p>
-<p class="p1"><span class="s1">.phil-text .label{color:var(--terra-light)}</span></p>
-<p class="p1"><span class="s1">.phil-text .title{color:white;margin-bottom:28px}</span></p>
-<p class="p1"><span class="s1">.phil-text p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:18px}</span></p>
-<p class="p1"><span class="s1">.phil-quote{font-family:'Cormorant Garamond',serif;font-size:23px;font-style:italic;color:var(--terra-light);border-left:2px solid var(--terracotta);padding-left:22px;margin:28px 0;line-height:1.5}</span></p>
-<p class="p1"><span class="s1">.phil-img{background:url('images/studio-apparatus.jpg') center/cover no-repeat;min-height:560px}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── STATS ── */</span></p>
-<p class="p1"><span class="s1">.stats{background:var(--terracotta);padding:44px 48px}</span></p>
-<p class="p1"><span class="s1">.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}</span></p>
-<p class="p1"><span class="s1">.stat-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:white;line-height:1}</span></p>
-<p class="p1"><span class="s1">.stat-l{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:8px}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── IMAGE STRIP ── */</span></p>
-<p class="p1"><span class="s1">.strip{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}</span></p>
-<p class="p1"><span class="s1">.strip-img{aspect-ratio:1;background:var(--cream);overflow:hidden}</span></p>
-<p class="p1"><span class="s1">.strip-img img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s;display:block}</span></p>
-<p class="p1"><span class="s1">.strip-img:hover img{transform:scale(1.06)}</span></p>
-<p class="p1"><span class="s1">/* Placeholders when no image */</span></p>
-<p class="p1"><span class="s1">.strip-img{background:var(--cream) center/cover no-repeat}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── CLASSES ── */</span></p>
-<p class="p1"><span class="s1">.classes-intro{margin-bottom:56px}</span></p>
-<p class="p1"><span class="s1">.classes-intro .title{margin-bottom:14px}</span></p>
-<p class="p1"><span class="s1">.classes-intro p{font-size:15px;opacity:.65;max-width:480px;line-height:1.7}</span></p>
-<p class="p1"><span class="s1">.classes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:56px}</span></p>
-<p class="p1"><span class="s1">.class-card{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--cream)}</span></p>
-<p class="p1"><span class="s1">.class-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s;display:block}</span></p>
-<p class="p1"><span class="s1">.class-card:hover img{transform:scale(1.04)}</span></p>
-<p class="p1"><span class="s1">.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(43,40,37,.88) 45%,transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}</span></p>
-<p class="p1"><span class="s1">.card-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-light);margin-bottom:8px}</span></p>
-<p class="p1"><span class="s1">.card-overlay h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:white;margin-bottom:8px;line-height:1.2}</span></p>
-<p class="p1"><span class="s1">.card-overlay p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.7)}</span></p>
-<p class="p1"><span class="s1">/* placeholder bg colors per card */</span></p>
-<p class="p1"><span class="s1">.card-c1{background:#c8b4a4}</span></p>
-<p class="p1"><span class="s1">.card-c2{background:#b0a898}</span></p>
-<p class="p1"><span class="s1">.card-c3{background:#a8987e}</span></p>
-<p class="p1"><span class="s1">.card-c4{background:#b4a490}</span></p>
-<p class="p1"><span class="s1">.card-c5{background:#c0b0a0}</span></p>
-<p class="p1"><span class="s1">.card-c6{background:#b8a898}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">.not-sure{background:var(--cream);padding:52px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}</span></p>
-<p class="p1"><span class="s1">.not-sure h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1.2;margin-bottom:14px}</span></p>
-<p class="p1"><span class="s1">.not-sure h3 em{font-style:italic}</span></p>
-<p class="p1"><span class="s1">.not-sure p{font-size:14px;line-height:1.75;opacity:.7;margin-bottom:28px}</span></p>
-<p class="p1"><span class="s1">.not-sure-list{display:grid;gap:12px}</span></p>
-<p class="p1"><span class="s1">.not-sure-list li{font-size:14px;line-height:1.65;opacity:.8;list-style:none;padding-left:20px;position:relative}</span></p>
-<p class="p1"><span class="s1">.not-sure-list li::before{content:'✓';position:absolute;left:0;color:var(--terracotta)}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── GALLERY ROW ── */</span></p>
-<p class="p1"><span class="s1">.gallery-row{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:0 48px;max-width:1296px;margin:0 auto 80px}</span></p>
-<p class="p1"><span class="s1">.gal-img{overflow:hidden;background:var(--cream)}</span></p>
-<p class="p1"><span class="s1">.gal-img img{width:100%;height:100%;object-fit:cover;display:block}</span></p>
-<p class="p1"><span class="s1">.gal-img:nth-child(1),.gal-img:nth-child(2),.gal-img:nth-child(4),.gal-img:nth-child(5){aspect-ratio:4/5}</span></p>
-<p class="p1"><span class="s1">.gal-img:nth-child(3){aspect-ratio:4/6}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── TESTIMONIALS ── */</span></p>
-<p class="p1"><span class="s1">.testimonials{background:var(--cream)}</span></p>
-<p class="p1"><span class="s1">.testi-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:44px 48px 0;margin-top:8px}</span></p>
-<p class="p1"><span class="s1">.testi-scroll::-webkit-scrollbar{display:none}</span></p>
-<p class="p1"><span class="s1">.testi-track{display:grid;grid-template-columns:repeat(4,340px);gap:20px;padding:4px 2px}</span></p>
-<p class="p1"><span class="s1">.testi-card{background:white;padding:36px 32px;display:flex;flex-direction:column}</span></p>
-<p class="p1"><span class="s1">.testi-stars{color:var(--terracotta);font-size:13px;letter-spacing:3px;margin-bottom:16px}</span></p>
-<p class="p1"><span class="s1">.testi-quote{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.65;color:var(--charcoal);margin-bottom:20px;flex:1}</span></p>
-<p class="p1"><span class="s1">.testi-author{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta)}</span></p>
-<p class="p1"><span class="s1">.testi-detail{font-size:12px;opacity:.5;margin-top:3px;letter-spacing:.04em}</span></p>
-<p class="p1"><span class="s1">.testi-footer{text-align:center;margin-top:40px}</span></p>
-<p class="p1"><span class="s1">.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:28px}</span></p>
-<p class="p1"><span class="s1">.testi-dots span{width:6px;height:6px;border-radius:50%;background:rgba(43,40,37,.2);cursor:pointer;transition:background .2s,width .3s}</span></p>
-<p class="p1"><span class="s1">.testi-dots span.active{background:var(--terracotta);width:20px;border-radius:3px}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── STUDIO ── */</span></p>
-<p class="p1"><span class="s1">.studio-wrap{display:grid;grid-template-columns:1fr 1fr}</span></p>
-<p class="p1"><span class="s1">.studio-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:300px 300px;gap:3px}</span></p>
-<p class="p1"><span class="s1">.studio-imgs img{width:100%;height:100%;object-fit:cover;display:block}</span></p>
-<p class="p1"><span class="s1">/* placeholder */</span></p>
-<p class="p1"><span class="s1">.s-ph{background:var(--cream)}</span></p>
-<p class="p1"><span class="s1">.s-ph-1{background:#c4b8a8}</span></p>
-<p class="p1"><span class="s1">.s-ph-2{background:#b8ac9c}</span></p>
-<p class="p1"><span class="s1">.s-ph-3{background:#ccbfaf}</span></p>
-<p class="p1"><span class="s1">.s-ph-4{background:#bfb3a3}</span></p>
-<p class="p1"><span class="s1">.studio-info{background:var(--charcoal);color:white;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}</span></p>
-<p class="p1"><span class="s1">.studio-info .label{color:var(--terra-light)}</span></p>
-<p class="p1"><span class="s1">.studio-info .title{color:white;margin-bottom:28px}</span></p>
-<p class="p1"><span class="s1">.studio-info p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.72);margin-bottom:18px}</span></p>
-<p class="p1"><span class="s1">.studio-callout{background:var(--terracotta);padding:20px 24px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:white;line-height:1.5}</span></p>
-<p class="p1"><span class="s1">.equip-list{list-style:none;display:grid;gap:10px;margin-top:20px}</span></p>
-<p class="p1"><span class="s1">.equip-list li{font-size:13px;color:rgba(255,255,255,.72);display:flex;gap:10px}</span></p>
-<p class="p1"><span class="s1">.equip-list li::before{content:'—';color:var(--terracotta);flex-shrink:0}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── PRICING ── */</span></p>
-<p class="p1"><span class="s1">.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px}</span></p>
-<p class="p1"><span class="s1">.price-card{background:var(--cream);padding:40px 32px;display:flex;flex-direction:column}</span></p>
-<p class="p1"><span class="s1">.price-card.featured{background:var(--charcoal);color:white}</span></p>
-<p class="p1"><span class="s1">.price-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:12px}</span></p>
-<p class="p1"><span class="s1">.price-card.featured .price-tag{color:var(--terra-light)}</span></p>
-<p class="p1"><span class="s1">.price-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:8px;line-height:1.2}</span></p>
-<p class="p1"><span class="s1">.price-card.featured .price-name{color:white}</span></p>
-<p class="p1"><span class="s1">.price-amount{font-size:40px;font-weight:300;letter-spacing:-.01em;margin-bottom:6px}</span></p>
-<p class="p1"><span class="s1">.price-card.featured .price-amount{color:white}</span></p>
-<p class="p1"><span class="s1">.price-detail{font-size:12px;opacity:.6;margin-bottom:24px;line-height:1.5}</span></p>
-<p class="p1"><span class="s1">.price-features{list-style:none;display:grid;gap:8px;margin-bottom:32px;flex:1}</span></p>
-<p class="p1"><span class="s1">.price-features li{font-size:13px;display:flex;gap:10px}</span></p>
-<p class="p1"><span class="s1">.price-features li::before{content:'✓';color:var(--terracotta);flex-shrink:0}</span></p>
-<p class="p1"><span class="s1">.price-card.featured .price-features li{color:rgba(255,255,255,.8)}</span></p>
-<p class="p1"><span class="s1">.price-card.featured .price-features li::before{color:var(--terra-light)}</span></p>
-<p class="p1"><span class="s1">.price-duo-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px}</span></p>
-<p class="p1"><span class="s1">.price-duo-row .price-card{background:var(--cream)}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── CTA BAND ── */</span></p>
-<p class="p1"><span class="s1">.cta-band{background:var(--terracotta);padding:90px 48px;text-align:center}</span></p>
-<p class="p1"><span class="s1">.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:white;margin-bottom:16px;line-height:1.1}</span></p>
-<p class="p1"><span class="s1">.cta-band h2 em{font-style:italic}</span></p>
-<p class="p1"><span class="s1">.cta-band p{font-size:15px;color:rgba(255,255,255,.8);max-width:500px;margin:0 auto 40px}</span></p>
-<p class="p1"><span class="s1">.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── CONTACT ── */</span></p>
-<p class="p1"><span class="s1">.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}</span></p>
-<p class="p1"><span class="s1">.contact-info h3{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:28px;line-height:1.2}</span></p>
-<p class="p1"><span class="s1">.contact-info h3 em{font-style:italic}</span></p>
-<p class="p1"><span class="s1">.c-item{margin-bottom:22px}</span></p>
-<p class="p1"><span class="s1">.c-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:5px}</span></p>
-<p class="p1"><span class="s1">.c-text{font-size:14px;line-height:1.65;opacity:.78}</span></p>
-<p class="p1"><span class="s1">.c-text a{color:var(--terracotta);text-decoration:none}</span></p>
-<p class="p1"><span class="s1">.map{height:280px;background:var(--cream);margin-top:28px;overflow:hidden}</span></p>
-<p class="p1"><span class="s1">.map iframe{width:100%;height:100%;border:0;display:block}</span></p>
-<p class="p1"><span class="s1">.contact-form{display:flex;flex-direction:column;gap:0}</span></p>
-<p class="p1"><span class="s1">.contact-form h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:28px;line-height:1.3}</span></p>
-<p class="p1"><span class="s1">.contact-form input,</span></p>
-<p class="p1"><span class="s1">.contact-form select,</span></p>
-<p class="p1"><span class="s1">.contact-form textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(43,40,37,.2);padding:14px 0;font-family:'Jost',sans-serif;font-size:14px;color:var(--charcoal);margin-bottom:18px;outline:none;transition:border-color .2s;-webkit-appearance:none}</span></p>
-<p class="p1"><span class="s1">.contact-form input:focus,</span></p>
-<p class="p1"><span class="s1">.contact-form select:focus,</span></p>
-<p class="p1"><span class="s1">.contact-form textarea:focus{border-bottom-color:var(--terracotta)}</span></p>
-<p class="p1"><span class="s1">.contact-form textarea{height:100px;resize:none}</span></p>
-<p class="p1"><span class="s1">.contact-form select{cursor:pointer;background:transparent}</span></p>
-<p class="p1"><span class="s1">.form-submit{background:var(--terracotta);color:white;border:none;padding:16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .25s;width:100%;margin-top:6px}</span></p>
-<p class="p1"><span class="s1">.form-submit:hover{background:var(--charcoal)}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── FOOTER ── */</span></p>
-<p class="p1"><span class="s1">footer{background:var(--charcoal);color:white;padding:64px 48px 40px}</span></p>
-<p class="p1"><span class="s1">.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;max-width:1200px;margin:0 auto 48px}</span></p>
-<p class="p1"><span class="s1">.f-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}</span></p>
-<p class="p1"><span class="s1">.f-tagline{font-size:13px;opacity:.55;line-height:1.7;max-width:260px}</span></p>
-<p class="p1"><span class="s1">.f-address{font-size:12px;opacity:.45;margin-top:14px;line-height:1.65}</span></p>
-<p class="p1"><span class="s1">.f-col h4{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}</span></p>
-<p class="p1"><span class="s1">.f-col ul{list-style:none;display:grid;gap:10px}</span></p>
-<p class="p1"><span class="s1">.f-col a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}</span></p>
-<p class="p1"><span class="s1">.f-col a:hover{color:white}</span></p>
-<p class="p1"><span class="s1">.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}</span></p>
-<p class="p1"><span class="s1">.f-copy{font-size:12px;opacity:.38}</span></p>
-<p class="p1"><span class="s1">.f-social{display:flex;gap:20px}</span></p>
-<p class="p1"><span class="s1">.f-social a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}</span></p>
-<p class="p1"><span class="s1">.f-social a:hover{color:white}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">/* ── RESPONSIVE ── */</span></p>
-<p class="p1"><span class="s1">@media(max-width:1024px){</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.phil-text{padding:80px 48px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.studio-info{padding:64px 48px}</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">@media(max-width:900px){</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.classes-grid{grid-template-columns:1fr 1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.phil-grid{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.phil-img{min-height:380px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.phil-text{padding:64px 48px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.not-sure{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.studio-wrap{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.studio-imgs{grid-template-rows:240px 240px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.pricing-grid{grid-template-columns:1fr 1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.footer-grid{grid-template-columns:1fr 1fr;gap:40px}</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">@media(max-width:768px){</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>html{scroll-padding-top:64px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>nav{padding:16px 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.nav-links{display:none}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hamburger{display:flex}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.sticky-cta{display:block}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>body{padding-bottom:62px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>section{padding:64px 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero-content{padding:0 24px;max-width:100%}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero h1{font-size:clamp(38px,11vw,60px)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero-sub{font-size:14px;max-width:100%}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero-ctas{flex-direction:column;gap:12px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero-ctas a{text-align:center;padding:16px 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero-trust{gap:14px;margin-top:24px;padding-top:24px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.trust-item{font-size:11px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.stats{padding:32px 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.stats-grid{grid-template-columns:repeat(2,1fr);gap:28px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.stat-n{font-size:40px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.strip{grid-template-columns:repeat(3,1fr)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.classes-grid{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.class-card{aspect-ratio:4/3}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.not-sure{padding:36px 24px;gap:32px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.gallery-row{grid-template-columns:repeat(2,1fr);padding:0 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.gallery-row .gal-img:nth-child(3){display:none}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.testi-scroll{padding:40px 20px 0}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.testi-track{grid-template-columns:repeat(4,86vw)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.studio-imgs{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.studio-info{padding:52px 24px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.pricing-grid{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.price-duo-row{grid-template-columns:1fr}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.cta-band{padding:64px 20px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.cta-btns{flex-direction:column;align-items:center}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.cta-btns a{width:100%;max-width:340px;text-align:center}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.contact-grid{grid-template-columns:1fr;gap:48px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.map{height:220px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.footer-grid{grid-template-columns:1fr;gap:36px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>footer{padding:52px 20px 80px}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.footer-bottom{flex-direction:column;gap:14px;text-align:center}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.f-social{justify-content:center}</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">@media(max-width:480px){</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.strip{grid-template-columns:repeat(2,1fr)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.hero h1{font-size:clamp(34px,12vw,50px)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.stats-grid{grid-template-columns:repeat(2,1fr)}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.phil-text{padding:52px 24px}</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div class="cursor" id="cursor"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="cursor-ring" id="cursorRing"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- STICKY MOBILE CTA --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="sticky-cta"&gt;Book your trial class — £25&lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- MOBILE MENU --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="mobile-menu" id="mobileMenu"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button class="mob-close" id="mobClose" aria-label="Close menu"&gt;✕&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#about" class="mob-link"&gt;About&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#classes" class="mob-link"&gt;Classes&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#studio" class="mob-link"&gt;The Studio&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#pricing" class="mob-link"&gt;Pricing&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#contact" class="mob-link"&gt;Contact&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="mob-link mob-book"&gt;Book Your Trial — £25&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- NAV --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;nav id="mainNav"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;a href="#home" class="logo"&gt;Tres Pilates&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;ul class="nav-links"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="#classes"&gt;Classes&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="#studio"&gt;The Studio&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="#pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;li&gt;&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="nav-cta"&gt;Book Now&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button class="hamburger" id="hamburger" aria-label="Open menu"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/nav&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- HERO --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section class="hero" id="home"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="hero-bg"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="hero-overlay"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="hero-content reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="hero-eyebrow"&gt;Classical Pilates · Finedon, Northamptonshire&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Feel strong&lt;br&gt;in a body&lt;br&gt;&lt;em&gt;you trust again.&lt;/em&gt;&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="hero-sub"&gt;A small, private studio where no one judges, everyone is seen, and the work is real. Six people maximum. Every single class.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-ctas"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-terra"&gt;Try your first class — £25&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;a href="#about" class="btn btn-ghost"&gt;How it works&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-trust"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;span class="trust-item"&gt;No experience needed&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;span class="trust-item"&gt;Max 6 per class&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;span class="trust-item"&gt;All ages &amp;amp; abilities&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;span class="trust-item"&gt;Free parking&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- PHILOSOPHY --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section class="philosophy" id="about"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="phil-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="phil-text reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="label"&gt;Our approach&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2 class="title"&gt;No fads.&lt;br&gt;No shortcuts.&lt;br&gt;&lt;em&gt;Just the work.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Over 10 years teaching across three continents — and every class still taught with the same precision. Classical Pilates as Joseph Pilates intended it: a complete system of movement that builds strength from the inside out.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;At Tres Pilates, you'll never be one of twenty people in a room staring at a screen. Every class is capped at six. Every session is taught, not managed.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;blockquote class="phil-quote"&gt;"This is a practice, not a performance."&lt;/blockquote&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-terra" style="align-self:flex-start;margin-top:8px"&gt;Book your trial — £25&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="phil-img reveal" role="img" aria-label="Classical Pilates apparatus at Tres Pilates studio"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- STATS --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="stats"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="stats-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-n"&gt;6&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-l"&gt;Max clients per class&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-n"&gt;10+&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-l"&gt;Years of teaching&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-n"&gt;3&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-l"&gt;Continents taught on&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-n"&gt;100%&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="stat-l"&gt;Classical method&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- IMAGE STRIP --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="strip"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#c8b8a8 url('images/strip-1.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#b8aca0 url('images/strip-2.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#c0b0a0 url('images/strip-3.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#b0a898 url('images/strip-4.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#c4b4a4 url('images/strip-5.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="strip-img" style="background:#bca898 url('images/strip-6.jpg') center/cover"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- CLASSES --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section id="classes"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="inner"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="classes-intro reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="label"&gt;Classes&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2 class="title"&gt;Your practice,&lt;br&gt;your way.&lt;br&gt;&lt;em&gt;There's a place for you here.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Whether you're just starting out or teaching others, every class is capped at 6. Because that's what good Pilates requires.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="classes-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c1 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-beginners.jpg" alt="Absolute Beginners Pilates class" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;For beginners&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Absolute Beginners&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;Never done this before? Good. We start from the beginning — and we mean it.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c2 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-group.jpg" alt="Group Pilates class on reformer" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;For everyone&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Group Classes&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;Six people, one teacher, real apparatus. This is what a Pilates class should feel like.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c3 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-private.jpg" alt="Private Pilates session" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;One-to-one&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Private Sessions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;Your body, your timeline. Private sessions build the foundation everything else is built on.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c4 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-levelup.jpg" alt="Level Up Pilates class" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;Intermediate +&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Level Up&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;You know the work. Now this is where it gets interesting.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c5 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-duo.jpg" alt="Duo Pilates session" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;Bring a friend&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Duo Sessions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;Two of you, one teacher. All the focus of a private, shared with someone you choose.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="class-card card-c6 reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;img src="images/class-gentle.jpg" alt="Gentle and Active Pilates class" loading="lazy"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="card-overlay"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="card-tag"&gt;All abilities&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Gentle &amp;amp; Active&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p&gt;Movement that works with your body, not against it — for those returning, recovering, or simply taking it steady.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="not-sure reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="label"&gt;Not sure where to start?&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Start with your&lt;br&gt;&lt;em&gt;trial class.&lt;/em&gt;&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;One hour, £25, no commitment. Come and feel what this is really about. If it's not for you, you've lost an hour and £25. If it is — you'll wonder what took you so long.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-terra"&gt;Book your trial — £25&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;ul class="not-sure-list"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;I've tried Pilates before but never in a studio like this&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;I've been told I have bad posture for years&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;I keep meaning to do something and never do&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;My back has been an issue and I don't know where to start&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;I'm a runner, cyclist or swimmer who wants to move better&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;I just need something that's actually for me&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- GALLERY ROW --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="gallery-row"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="gal-img" style="background:#c0b0a0"&gt;&lt;img src="images/gallery-1.jpg" alt="Tres Pilates studio class" loading="lazy"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="gal-img" style="background:#b8aca0"&gt;&lt;img src="images/gallery-2.jpg" alt="Teacher correcting form" loading="lazy"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="gal-img" style="background:#c8b8ac"&gt;&lt;img src="images/gallery-3.jpg" alt="Feet in reformer straps" loading="lazy"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="gal-img" style="background:#b4a898"&gt;&lt;img src="images/gallery-4.jpg" alt="Client on reformer" loading="lazy"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="gal-img" style="background:#c4b4a8"&gt;&lt;img src="images/gallery-5.jpg" alt="Pilates class in action" loading="lazy"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- TESTIMONIALS --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section class="testimonials" id="testimonials"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="inner"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="label reveal"&gt;Google Reviews&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2 class="title reveal"&gt;Women who came nervous.&lt;br&gt;&lt;em&gt;Who keep coming back.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p style="font-size:15px;opacity:.65;margin-top:14px;max-width:520px;line-height:1.7" class="reveal"&gt;Most of our clients had never set foot in a Pilates studio. Many hadn't done any structured exercise in years. All of them will tell you the same thing.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="testi-scroll" id="testiScroll"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="testi-track" id="testiTrack"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="testi-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="testi-stars"&gt;★★★★★&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-quote"&gt;"Incredible teacher, very helpful, lovely class."&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-author"&gt;Hollie O'Connor&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-detail"&gt;Google review&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="testi-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="testi-stars"&gt;★★★★★&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-quote"&gt;"I have noticed a massive improvement in my core strength and mobility in 10 weeks. I have been to a few reformer and tower studios — regardless how aesthetically pleasing they look for Insta, you must have an experienced teacher. Diana is the best by far and has a wealth of knowledge and years of worldwide experience. She understands the foundation of Pilates like nobody I've ever been taught by. If you're looking for knowledge over the trend, go experience it for yourself."&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-author"&gt;Sandra Puckerin&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-detail"&gt;Google review · attending since March&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="testi-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="testi-stars"&gt;★★★★★&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-quote"&gt;"Lovely — filled me with confidence."&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-author"&gt;Clare Barnette&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-detail"&gt;Google review&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="testi-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="testi-stars"&gt;★★★★★&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-quote"&gt;"I highly recommend Diana for both beginners and more experienced Pilates practitioners. The classes are fun and challenging and I look forward to my classes every week."&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-author"&gt;Becky Englesberg&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="testi-detail"&gt;Google review&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="testi-dots reveal" id="testiDots"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;span class="active" data-i="0"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;span data-i="1"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;span data-i="2"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;span data-i="3"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="testi-footer reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-terra"&gt;Join them — book your trial for £25&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- STUDIO --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section id="studio" style="padding:0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="studio-wrap"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="studio-imgs"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="s-ph s-ph-1"&gt;&lt;img src="images/studio-1.jpg" alt="Tres Pilates studio" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="s-ph s-ph-2"&gt;&lt;img src="images/studio-2.jpg" alt="Studio apparatus" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="s-ph s-ph-3"&gt;&lt;img src="images/studio-3.jpg" alt="Reformer detail" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="s-ph s-ph-4"&gt;&lt;img src="images/studio-4.jpg" alt="Teaching at Tres Pilates" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="studio-info"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="label reveal"&gt;The Studio&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2 class="title reveal"&gt;A space built&lt;br&gt;for &lt;em&gt;the real thing.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="reveal"&gt;Tres Pilates is home to a full suite of Legacy apparatus — manufactured to Joseph Pilates' original specifications. It is the only studio of its kind in the Midlands.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="studio-callout reveal"&gt;"Come and see it for yourself. One hour. £25. No commitment."&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;ul class="equip-list reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;6 Reformer Transformer Towers (Legacy)&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;6 Classical Wunda Chairs (Legacy)&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;Cadillac / Trapeze Table&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;Ladder Barrel &amp;amp; Spine Correctors&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;Foot Correctors, Roll Up &amp;amp; Push Up Devices&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="reveal" style="margin-top:28px"&gt;Free on-site parking. Online booking. Easily reachable from Wellingborough, Kettering, Rushden and Irthlingborough.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="reveal" style="margin-top:8px"&gt;&lt;strong&gt;Unit 3, 17 Rock Road, Finedon NN9 5EL&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- PRICING --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section id="pricing"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="inner"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="label reveal"&gt;Pricing&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2 class="title reveal"&gt;Simple, honest&lt;br&gt;&lt;em&gt;pricing.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p style="font-size:15px;opacity:.65;margin-top:12px;max-width:480px;line-height:1.7" class="reveal"&gt;No hidden fees, no contracts. Start with a trial and go from there.&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="pricing-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="price-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-tag"&gt;Start here&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="price-name"&gt;Trial Session&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="price-amount"&gt;£25&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-detail"&gt;One session · no commitment&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul class="price-features"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Full 1-hour group class&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Any level welcome&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;On Legacy apparatus&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-terra" style="text-align:center"&gt;Book trial&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="price-card featured reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-tag"&gt;Most popular&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="price-name"&gt;1&amp;times; week&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="price-amount"&gt;£93&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-detail"&gt;4 sessions · valid 4 weeks from purchase&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul class="price-features"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Best value for regular practice&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;All class types included&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Book via app anytime&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Drop-in flexibility&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-outline-white" style="text-align:center"&gt;Get started&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="price-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-tag"&gt;Most flexible&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="price-name"&gt;12 Sessions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="price-amount"&gt;£233&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-detail"&gt;12 sessions · valid 6 weeks from purchase&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;ul class="price-features"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Longest validity window&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Mix &amp;amp; match any classes&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;li&gt;Great for busy schedules&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-outline" style="text-align:center"&gt;Get started&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="price-duo-row"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="price-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-tag"&gt;One-to-one&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="price-name"&gt;Private Sessions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="price-amount" style="font-size:28px"&gt;From £80&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-detail"&gt;4-session package: £303 · 8-session: £560&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://wa.me/447861413350" target="_blank" class="btn btn-terra" style="text-align:center;margin-top:auto"&gt;Enquire via WhatsApp&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="price-card reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-tag"&gt;Bring a friend&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="price-name"&gt;Duo Sessions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="price-amount" style="font-size:28px"&gt;From £413&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="price-detail"&gt;4-session package (2:1) · 8-session: £743&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;a href="https://wa.me/447861413350" target="_blank" class="btn btn-terra" style="text-align:center;margin-top:auto"&gt;Enquire via WhatsApp&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- CTA BAND --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;div class="cta-band"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h2 class="reveal"&gt;Ready to begin?&lt;br&gt;&lt;em&gt;One hour. £25.&lt;/em&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;p class="reveal"&gt;No experience necessary. Just show up.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="cta-btns reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank" class="btn btn-white"&gt;Book your trial class&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a href="https://wa.me/447861413350" target="_blank" class="btn btn-outline-white"&gt;WhatsApp us&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- CONTACT --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;section id="contact"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="inner"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="contact-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="label reveal"&gt;Find us&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 class="reveal"&gt;Come and see&lt;br&gt;&lt;em&gt;the studio.&lt;/em&gt;&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="c-item reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-label"&gt;Address&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-text"&gt;Unit 3, 17 Rock Road&lt;br&gt;Finedon NN9 5EL&lt;br&gt;Free parking on site&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="c-item reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-label"&gt;WhatsApp&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-text"&gt;&lt;a href="https://wa.me/447861413350" target="_blank"&gt;+44 7861 413350&lt;/a&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="c-item reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-label"&gt;Instagram&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="c-text"&gt;&lt;a href="https://instagram.com/trespilates_studio" target="_blank"&gt;@trespilates_studio&lt;/a&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="map reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.5!2d-0.6167!3d52.3333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48770a9f0db73faf%3A0x0!2zNTLCsDIwJzAwIk4gMMKwMzcnMDAiVw!5e0!3m2!1sen!2suk!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Tres Pilates location map"&gt;&lt;/iframe&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="reveal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:28px;line-height:1.3"&gt;Questions? We'd love&lt;br&gt;to hear from you.&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;form class="contact-form" onsubmit="handleForm(event)"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;input type="text" placeholder="Your name" required&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;input type="email" placeholder="Email address" required&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;input type="tel" placeholder="Phone (optional)"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option value="" disabled selected&gt;What are you interested in?&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Trial class (£25)&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Group classes&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Private sessions&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Duo sessions&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Corporate wellness&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option value="" disabled selected&gt;Your experience level&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Complete beginner&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Some experience&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Intermediate&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;option&gt;Advanced&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;textarea placeholder="Anything you'd like us to know?"&gt;&lt;/textarea&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;button type="submit" class="form-submit"&gt;Send message&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- FOOTER --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;footer&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="footer-grid"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="f-logo"&gt;Tres Pilates&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="f-tagline"&gt;Classical Pilates on Legacy apparatus. The only studio of its kind in the Midlands.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p class="f-address"&gt;Unit 3, 17 Rock Road&lt;br&gt;Finedon NN9 5EL&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="f-col"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h4&gt;Classes&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#classes"&gt;Group Classes&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#classes"&gt;Private Sessions&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#classes"&gt;Duo Sessions&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#classes"&gt;Absolute Beginners&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#classes"&gt;Gentle &amp;amp; Active&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="f-col"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h4&gt;Studio&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#studio"&gt;Our Apparatus&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#studio"&gt;The Space&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="#contact"&gt;Find Us&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="f-col"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h4&gt;Connect&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="https://instagram.com/trespilates_studio" target="_blank"&gt;Instagram&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="https://wa.me/447861413350" target="_blank"&gt;WhatsApp&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;li&gt;&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank"&gt;Book Online&lt;/a&gt;&lt;/li&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="footer-bottom"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="f-copy"&gt;&amp;copy; 2025 Tres Pilates &amp;middot; Finedon, Northamptonshire&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="f-social"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;a href="https://instagram.com/trespilates_studio" target="_blank"&gt;Instagram&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&amp;productId=51763" target="_blank"&gt;Book a class&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/footer&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">// ── Custom cursor (desktop only) ─────────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">const cursor = document.getElementById('cursor');</span></p>
-<p class="p1"><span class="s1">const ring <span class="Apple-converted-space">  </span>= document.getElementById('cursorRing');</span></p>
-<p class="p1"><span class="s1">if (window.matchMedia('(pointer:fine)').matches) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.addEventListener('mousemove', e =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor.style.left = e.clientX + 'px';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>cursor.style.top<span class="Apple-converted-space">  </span>= e.clientY + 'px';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>setTimeout(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>ring.style.left = e.clientX + 'px';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>ring.style.top<span class="Apple-converted-space">  </span>= e.clientY + 'px';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}, 80);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p1"><span class="s1">} else {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>cursor.style.display = 'none';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ring.style.display <span class="Apple-converted-space">  </span>= 'none';</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Scroll reveal ────────────────────────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">const revealObs = new IntersectionObserver(entries =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>entries.forEach(e =&gt; { if (e.isIntersecting) e.target.classList.add('visible'); });</span></p>
-<p class="p1"><span class="s1">}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });</span></p>
-<p class="p1"><span class="s1">document.querySelectorAll('.reveal').forEach(el =&gt; revealObs.observe(el));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Nav scroll shadow + active links ────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">const mainNav<span class="Apple-converted-space">  </span>= document.getElementById('mainNav');</span></p>
-<p class="p1"><span class="s1">const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');</span></p>
-<p class="p1"><span class="s1">window.addEventListener('scroll', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>mainNav.classList.toggle('scrolled', window.scrollY &gt; 40);</span></p>
-<p class="p1"><span class="s1">}, { passive: true });</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">const secObs = new IntersectionObserver(entries =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>entries.forEach(entry =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (entry.isIntersecting) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>navLinks.forEach(a =&gt; a.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const match = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (match) match.classList.add('active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p1"><span class="s1">}, { rootMargin: '-72px 0px -60% 0px' });</span></p>
-<p class="p1"><span class="s1">document.querySelectorAll('section[id]').forEach(s =&gt; secObs.observe(s));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Smooth scroll for anchor links ──────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">document.querySelectorAll('a[href^="#"]').forEach(a =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>a.addEventListener('click', e =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const target = document.querySelector(a.getAttribute('href'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!target) return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const offset = mainNav.offsetHeight + 8;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p1"><span class="s1">});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Mobile hamburger ────────────────────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">const hamburger<span class="Apple-converted-space">  </span>= document.getElementById('hamburger');</span></p>
-<p class="p1"><span class="s1">const mobileMenu = document.getElementById('mobileMenu');</span></p>
-<p class="p1"><span class="s1">const mobClose <span class="Apple-converted-space">  </span>= document.getElementById('mobClose');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">function openMenu()<span class="Apple-converted-space">  </span>{ mobileMenu.classList.add('open');<span class="Apple-converted-space">  </span>hamburger.classList.add('open');<span class="Apple-converted-space">  </span>document.body.style.overflow = 'hidden'; }</span></p>
-<p class="p1"><span class="s1">function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }</span></p>
-<p class="p1"><span class="s1">hamburger.addEventListener('click', openMenu);</span></p>
-<p class="p1"><span class="s1">mobClose.addEventListener('click', closeMenu);</span></p>
-<p class="p1"><span class="s1">document.querySelectorAll('.mob-link').forEach(a =&gt; a.addEventListener('click', closeMenu));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Testimonials carousel ────────────────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">const testiScroll = document.getElementById('testiScroll');</span></p>
-<p class="p1"><span class="s1">const testiTrack<span class="Apple-converted-space">  </span>= document.getElementById('testiTrack');</span></p>
-<p class="p1"><span class="s1">const testiDots <span class="Apple-converted-space">  </span>= document.querySelectorAll('#testiDots span');</span></p>
-<p class="p1"><span class="s1">let currentCard = 0;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">function scrollToCard(i) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!testiTrack) return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const card = testiTrack.children[i];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!card) return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>testiScroll.scrollTo({ left: card.offsetLeft - testiScroll.offsetLeft, behavior: 'smooth' });</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>testiDots.forEach(d =&gt; d.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (testiDots[i]) testiDots[i].classList.add('active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>currentCard = i;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">testiDots.forEach(d =&gt; d.addEventListener('click', () =&gt; scrollToCard(+d.dataset.i)));</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">let autoplay = setInterval(() =&gt; scrollToCard((currentCard + 1) % testiDots.length), 5000);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">testiScroll.addEventListener('touchstart', () =&gt; clearInterval(autoplay), { passive: true });</span></p>
-<p class="p1"><span class="s1">testiScroll.addEventListener('scroll', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!testiTrack.children[0]) return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const w = testiTrack.children[0].offsetWidth + 20;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const i = Math.min(Math.round(testiScroll.scrollLeft / w), testiDots.length - 1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (i !== currentCard) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>testiDots.forEach(d =&gt; d.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (testiDots[i]) testiDots[i].classList.add('active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>currentCard = i;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p1"><span class="s1">}, { passive: true });</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">// ── Contact form ─────────────────────────────────────────────────────────</span></p>
-<p class="p1"><span class="s1">function handleForm(e) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const btn = e.target.querySelector('.form-submit');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>btn.textContent = 'Message sent ✓';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>btn.style.background = 'var(--sage)';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>btn.disabled = true;</span></p>
-<p class="p1"><span class="s1">}</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+ 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+ 
+<!-- STICKY MOBILE CTA -->
+<a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="sticky-cta">Book your trial class — £25</a>
+ 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mob-close" id="mobClose" aria-label="Close menu">✕</button>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#classes" class="mob-link">Classes</a>
+  <a href="#studio" class="mob-link">The Studio</a>
+  <a href="#pricing" class="mob-link">Pricing</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="mob-link mob-book">Book Your Trial — £25</a>
+</div>
+ 
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="logo">Tres Pilates</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#studio">The Studio</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content reveal">
+    <p class="hero-eyebrow">Classical Pilates · Finedon, Northamptonshire</p>
+    <h1>Feel strong<br>in a body<br><em>you trust again.</em></h1>
+    <p class="hero-sub">A small, private studio where no one judges, everyone is seen, and the work is real. Six people maximum. Every single class.</p>
+    <div class="hero-ctas">
+      <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-terra">Try your first class — £25</a>
+      <a href="#about" class="btn btn-ghost">How it works</a>
+    </div>
+    <div class="hero-trust">
+      <span class="trust-item">No experience needed</span>
+      <span class="trust-item">Max 6 per class</span>
+      <span class="trust-item">All ages &amp; abilities</span>
+      <span class="trust-item">Free parking</span>
+    </div>
+  </div>
+</section>
+ 
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="about">
+  <div class="phil-grid">
+    <div class="phil-text reveal">
+      <p class="label">Our approach</p>
+      <h2 class="title">No fads.<br>No shortcuts.<br><em>Just the work.</em></h2>
+      <p>Over 10 years teaching across three continents — and every class still taught with the same precision. Classical Pilates as Joseph Pilates intended it: a complete system of movement that builds strength from the inside out.</p>
+      <p>At Tres Pilates, you'll never be one of twenty people in a room staring at a screen. Every class is capped at six. Every session is taught, not managed.</p>
+      <blockquote class="phil-quote">"This is a practice, not a performance."</blockquote>
+      <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-terra" style="align-self:flex-start;margin-top:8px">Book your trial — £25</a>
+    </div>
+    <div class="phil-img reveal" role="img" aria-label="Classical Pilates apparatus at Tres Pilates studio"></div>
+  </div>
+</section>
+ 
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="reveal">
+      <div class="stat-n">6</div>
+      <div class="stat-l">Max clients per class</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-n">10+</div>
+      <div class="stat-l">Years of teaching</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-n">3</div>
+      <div class="stat-l">Continents taught on</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-n">100%</div>
+      <div class="stat-l">Classical method</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- IMAGE STRIP -->
+<div class="strip">
+  <div class="strip-img" style="background:#c8b8a8 url('images/strip-1.jpg') center/cover"></div>
+  <div class="strip-img" style="background:#b8aca0 url('images/strip-2.jpg') center/cover"></div>
+  <div class="strip-img" style="background:#c0b0a0 url('images/strip-3.jpg') center/cover"></div>
+  <div class="strip-img" style="background:#b0a898 url('images/strip-4.jpg') center/cover"></div>
+  <div class="strip-img" style="background:#c4b4a4 url('images/strip-5.jpg') center/cover"></div>
+  <div class="strip-img" style="background:#bca898 url('images/strip-6.jpg') center/cover"></div>
+</div>
+ 
+<!-- CLASSES -->
+<section id="classes">
+  <div class="inner">
+    <div class="classes-intro reveal">
+      <p class="label">Classes</p>
+      <h2 class="title">Your practice,<br>your way.<br><em>There's a place for you here.</em></h2>
+      <p>Whether you're just starting out or teaching others, every class is capped at 6. Because that's what good Pilates requires.</p>
+    </div>
+ 
+    <div class="classes-grid">
+      <div class="class-card card-c1 reveal">
+        <img src="images/class-beginners.jpg" alt="Absolute Beginners Pilates class" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">For beginners</span>
+          <h3>Absolute Beginners</h3>
+          <p>Never done this before? Good. We start from the beginning — and we mean it.</p>
+        </div>
+      </div>
+      <div class="class-card card-c2 reveal">
+        <img src="images/class-group.jpg" alt="Group Pilates class on reformer" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">For everyone</span>
+          <h3>Group Classes</h3>
+          <p>Six people, one teacher, real apparatus. This is what a Pilates class should feel like.</p>
+        </div>
+      </div>
+      <div class="class-card card-c3 reveal">
+        <img src="images/class-private.jpg" alt="Private Pilates session" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">One-to-one</span>
+          <h3>Private Sessions</h3>
+          <p>Your body, your timeline. Private sessions build the foundation everything else is built on.</p>
+        </div>
+      </div>
+      <div class="class-card card-c4 reveal">
+        <img src="images/class-levelup.jpg" alt="Level Up Pilates class" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">Intermediate +</span>
+          <h3>Level Up</h3>
+          <p>You know the work. Now this is where it gets interesting.</p>
+        </div>
+      </div>
+      <div class="class-card card-c5 reveal">
+        <img src="images/class-duo.jpg" alt="Duo Pilates session" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">Bring a friend</span>
+          <h3>Duo Sessions</h3>
+          <p>Two of you, one teacher. All the focus of a private, shared with someone you choose.</p>
+        </div>
+      </div>
+      <div class="class-card card-c6 reveal">
+        <img src="images/class-gentle.jpg" alt="Gentle and Active Pilates class" loading="lazy">
+        <div class="card-overlay">
+          <span class="card-tag">All abilities</span>
+          <h3>Gentle &amp; Active</h3>
+          <p>Movement that works with your body, not against it — for those returning, recovering, or simply taking it steady.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="not-sure reveal">
+      <div>
+        <p class="label">Not sure where to start?</p>
+        <h3>Start with your<br><em>trial class.</em></h3>
+        <p>One hour, £25, no commitment. Come and feel what this is really about. If it's not for you, you've lost an hour and £25. If it is — you'll wonder what took you so long.</p>
+        <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-terra">Book your trial — £25</a>
+      </div>
+      <ul class="not-sure-list">
+        <li>I've tried Pilates before but never in a studio like this</li>
+        <li>I've been told I have bad posture for years</li>
+        <li>I keep meaning to do something and never do</li>
+        <li>My back has been an issue and I don't know where to start</li>
+        <li>I'm a runner, cyclist or swimmer who wants to move better</li>
+        <li>I just need something that's actually for me</li>
+      </ul>
+    </div>
+  </div>
+</section>
+ 
+<!-- GALLERY ROW -->
+<div class="gallery-row">
+  <div class="gal-img" style="background:#c0b0a0"><img src="images/gallery-1.jpg" alt="Tres Pilates studio class" loading="lazy"></div>
+  <div class="gal-img" style="background:#b8aca0"><img src="images/gallery-2.jpg" alt="Teacher correcting form" loading="lazy"></div>
+  <div class="gal-img" style="background:#c8b8ac"><img src="images/gallery-3.jpg" alt="Feet in reformer straps" loading="lazy"></div>
+  <div class="gal-img" style="background:#b4a898"><img src="images/gallery-4.jpg" alt="Client on reformer" loading="lazy"></div>
+  <div class="gal-img" style="background:#c4b4a8"><img src="images/gallery-5.jpg" alt="Pilates class in action" loading="lazy"></div>
+</div>
+ 
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="inner">
+    <p class="label reveal">Google Reviews</p>
+    <h2 class="title reveal">Women who came nervous.<br><em>Who keep coming back.</em></h2>
+    <p style="font-size:15px;opacity:.65;margin-top:14px;max-width:520px;line-height:1.7" class="reveal">Most of our clients had never set foot in a Pilates studio. Many hadn't done any structured exercise in years. All of them will tell you the same thing.</p>
+  </div>
+ 
+  <div class="testi-scroll" id="testiScroll">
+    <div class="testi-track" id="testiTrack">
+ 
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Incredible teacher, very helpful, lovely class."</p>
+        <p class="testi-author">Hollie O'Connor</p>
+        <p class="testi-detail">Google review</p>
+      </div>
+ 
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I have noticed a massive improvement in my core strength and mobility in 10 weeks. I have been to a few reformer and tower studios — regardless how aesthetically pleasing they look for Insta, you must have an experienced teacher. Diana is the best by far and has a wealth of knowledge and years of worldwide experience. She understands the foundation of Pilates like nobody I've ever been taught by. If you're looking for knowledge over the trend, go experience it for yourself."</p>
+        <p class="testi-author">Sandra Puckerin</p>
+        <p class="testi-detail">Google review · attending since March</p>
+      </div>
+ 
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Lovely — filled me with confidence."</p>
+        <p class="testi-author">Clare Barnette</p>
+        <p class="testi-detail">Google review</p>
+      </div>
+ 
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I highly recommend Diana for both beginners and more experienced Pilates practitioners. The classes are fun and challenging and I look forward to my classes every week."</p>
+        <p class="testi-author">Becky Englesberg</p>
+        <p class="testi-detail">Google review</p>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <div class="testi-dots reveal" id="testiDots">
+    <span class="active" data-i="0"></span>
+    <span data-i="1"></span>
+    <span data-i="2"></span>
+    <span data-i="3"></span>
+  </div>
+  <div class="testi-footer reveal">
+    <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-terra">Join them — book your trial for £25</a>
+  </div>
+</section>
+ 
+<!-- STUDIO -->
+<section id="studio" style="padding:0">
+  <div class="studio-wrap">
+    <div class="studio-imgs">
+      <div class="s-ph s-ph-1"><img src="images/studio-1.jpg" alt="Tres Pilates studio" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="s-ph s-ph-2"><img src="images/studio-2.jpg" alt="Studio apparatus" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="s-ph s-ph-3"><img src="images/studio-3.jpg" alt="Reformer detail" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div class="s-ph s-ph-4"><img src="images/studio-4.jpg" alt="Teaching at Tres Pilates" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+    </div>
+    <div class="studio-info">
+      <p class="label reveal">The Studio</p>
+      <h2 class="title reveal">A space built<br>for <em>the real thing.</em></h2>
+      <p class="reveal">Tres Pilates is home to a full suite of Legacy apparatus — manufactured to Joseph Pilates' original specifications. It is the only studio of its kind in the Midlands.</p>
+      <div class="studio-callout reveal">"Come and see it for yourself. One hour. £25. No commitment."</div>
+      <ul class="equip-list reveal">
+        <li>6 Reformer Transformer Towers (Legacy)</li>
+        <li>6 Classical Wunda Chairs (Legacy)</li>
+        <li>Cadillac / Trapeze Table</li>
+        <li>Ladder Barrel &amp; Spine Correctors</li>
+        <li>Foot Correctors, Roll Up &amp; Push Up Devices</li>
+      </ul>
+      <p class="reveal" style="margin-top:28px">Free on-site parking. Online booking. Easily reachable from Wellingborough, Kettering, Rushden and Irthlingborough.</p>
+      <p class="reveal" style="margin-top:8px"><strong>Unit 3, 17 Rock Road, Finedon NN9 5EL</strong></p>
+    </div>
+  </div>
+</section>
+ 
+<!-- PRICING -->
+<section id="pricing">
+  <div class="inner">
+    <p class="label reveal">Pricing</p>
+    <h2 class="title reveal">Simple, honest<br><em>pricing.</em></h2>
+    <p style="font-size:15px;opacity:.65;margin-top:12px;max-width:480px;line-height:1.7" class="reveal">No hidden fees, no contracts. Start with a trial and go from there.</p>
+ 
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <p class="price-tag">Start here</p>
+        <h3 class="price-name">Trial Session</h3>
+        <div class="price-amount">£25</div>
+        <p class="price-detail">One session · no commitment</p>
+        <ul class="price-features">
+          <li>Full 1-hour group class</li>
+          <li>Any level welcome</li>
+          <li>On Legacy apparatus</li>
+        </ul>
+        <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-terra" style="text-align:center">Book trial</a>
+      </div>
+ 
+      <div class="price-card featured reveal">
+        <p class="price-tag">Most popular</p>
+        <h3 class="price-name">1&times; week</h3>
+        <div class="price-amount">£93</div>
+        <p class="price-detail">4 sessions · valid 4 weeks from purchase</p>
+        <ul class="price-features">
+          <li>Best value for regular practice</li>
+          <li>All class types included</li>
+          <li>Book via app anytime</li>
+          <li>Drop-in flexibility</li>
+        </ul>
+        <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-outline-white" style="text-align:center">Get started</a>
+      </div>
+ 
+      <div class="price-card reveal">
+        <p class="price-tag">Most flexible</p>
+        <h3 class="price-name">12 Sessions</h3>
+        <div class="price-amount">£233</div>
+        <p class="price-detail">12 sessions · valid 6 weeks from purchase</p>
+        <ul class="price-features">
+          <li>Longest validity window</li>
+          <li>Mix &amp; match any classes</li>
+          <li>Great for busy schedules</li>
+        </ul>
+        <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-outline" style="text-align:center">Get started</a>
+      </div>
+    </div>
+ 
+    <div class="price-duo-row">
+      <div class="price-card reveal">
+        <p class="price-tag">One-to-one</p>
+        <h3 class="price-name">Private Sessions</h3>
+        <div class="price-amount" style="font-size:28px">From £80</div>
+        <p class="price-detail">4-session package: £303 · 8-session: £560</p>
+        <a href="https://wa.me/447861413350" target="_blank" class="btn btn-terra" style="text-align:center;margin-top:auto">Enquire via WhatsApp</a>
+      </div>
+      <div class="price-card reveal">
+        <p class="price-tag">Bring a friend</p>
+        <h3 class="price-name">Duo Sessions</h3>
+        <div class="price-amount" style="font-size:28px">From £413</div>
+        <p class="price-detail">4-session package (2:1) · 8-session: £743</p>
+        <a href="https://wa.me/447861413350" target="_blank" class="btn btn-terra" style="text-align:center;margin-top:auto">Enquire via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2 class="reveal">Ready to begin?<br><em>One hour. £25.</em></h2>
+  <p class="reveal">No experience necessary. Just show up.</p>
+  <div class="cta-btns reveal">
+    <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank" class="btn btn-white">Book your trial class</a>
+    <a href="https://wa.me/447861413350" target="_blank" class="btn btn-outline-white">WhatsApp us</a>
+  </div>
+</div>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div>
+        <p class="label reveal">Find us</p>
+        <h3 class="reveal">Come and see<br><em>the studio.</em></h3>
+        <div class="c-item reveal">
+          <p class="c-label">Address</p>
+          <p class="c-text">Unit 3, 17 Rock Road<br>Finedon NN9 5EL<br>Free parking on site</p>
+        </div>
+        <div class="c-item reveal">
+          <p class="c-label">WhatsApp</p>
+          <p class="c-text"><a href="https://wa.me/447861413350" target="_blank">+44 7861 413350</a></p>
+        </div>
+        <div class="c-item reveal">
+          <p class="c-label">Instagram</p>
+          <p class="c-text"><a href="https://instagram.com/trespilates_studio" target="_blank">@trespilates_studio</a></p>
+        </div>
+        <div class="map reveal">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.5!2d-0.6167!3d52.3333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48770a9f0db73faf%3A0x0!2zNTLCsDIwJzAwIk4gMMKwMzcnMDAiVw!5e0!3m2!1sen!2suk!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Tres Pilates location map"></iframe>
+        </div>
+      </div>
+ 
+      <div class="reveal">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:28px;line-height:1.3">Questions? We'd love<br>to hear from you.</h3>
+        <form class="contact-form" onsubmit="handleForm(event)">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Email address" required>
+          <input type="tel" placeholder="Phone (optional)">
+          <select>
+            <option value="" disabled selected>What are you interested in?</option>
+            <option>Trial class (£25)</option>
+            <option>Group classes</option>
+            <option>Private sessions</option>
+            <option>Duo sessions</option>
+            <option>Corporate wellness</option>
+          </select>
+          <select>
+            <option value="" disabled selected>Your experience level</option>
+            <option>Complete beginner</option>
+            <option>Some experience</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+          <textarea placeholder="Anything you'd like us to know?"></textarea>
+          <button type="submit" class="form-submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="f-logo">Tres Pilates</div>
+      <p class="f-tagline">Classical Pilates on Legacy apparatus. The only studio of its kind in the Midlands.</p>
+      <p class="f-address">Unit 3, 17 Rock Road<br>Finedon NN9 5EL</p>
+    </div>
+    <div class="f-col">
+      <h4>Classes</h4>
+      <ul>
+        <li><a href="#classes">Group Classes</a></li>
+        <li><a href="#classes">Private Sessions</a></li>
+        <li><a href="#classes">Duo Sessions</a></li>
+        <li><a href="#classes">Absolute Beginners</a></li>
+        <li><a href="#classes">Gentle &amp; Active</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#studio">Our Apparatus</a></li>
+        <li><a href="#studio">The Space</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Find Us</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://instagram.com/trespilates_studio" target="_blank">Instagram</a></li>
+        <li><a href="https://wa.me/447861413350" target="_blank">WhatsApp</a></li>
+        <li><a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank">Book Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="f-copy">&copy; 2025 Tres Pilates &middot; Finedon, Northamptonshire</p>
+    <div class="f-social">
+      <a href="https://instagram.com/trespilates_studio" target="_blank">Instagram</a>
+      <a href="https://my.fitune.io/tres-pilates/checkout/complete_order?kind=pack&productId=51763" target="_blank">Book a class</a>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+// ── Custom cursor (desktop only) ─────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+if (window.matchMedia('(pointer:fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top  = e.clientY + 'px';
+    }, 80);
+  });
+} else {
+  cursor.style.display = 'none';
+  ring.style.display   = 'none';
+}
+ 
+// ── Scroll reveal ────────────────────────────────────────────────────────
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+ 
+// ── Nav scroll shadow + active links ────────────────────────────────────
+const mainNav  = document.getElementById('mainNav');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+ 
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-72px 0px -60% 0px' });
+document.querySelectorAll('section[id]').forEach(s => secObs.observe(s));
+ 
+// ── Smooth scroll for anchor links ──────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const offset = mainNav.offsetHeight + 8;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
+  });
+});
+ 
+// ── Mobile hamburger ────────────────────────────────────────────────────
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobClose   = document.getElementById('mobClose');
+ 
+function openMenu()  { mobileMenu.classList.add('open');  hamburger.classList.add('open');  document.body.style.overflow = 'hidden'; }
+function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', openMenu);
+mobClose.addEventListener('click', closeMenu);
+document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', closeMenu));
+ 
+// ── Testimonials carousel ────────────────────────────────────────────────
+const testiScroll = document.getElementById('testiScroll');
+const testiTrack  = document.getElementById('testiTrack');
+const testiDots   = document.querySelectorAll('#testiDots span');
+let currentCard = 0;
+ 
+function scrollToCard(i) {
+  if (!testiTrack) return;
+  const card = testiTrack.children[i];
+  if (!card) return;
+  testiScroll.scrollTo({ left: card.offsetLeft - testiScroll.offsetLeft, behavior: 'smooth' });
+  testiDots.forEach(d => d.classList.remove('active'));
+  if (testiDots[i]) testiDots[i].classList.add('active');
+  currentCard = i;
+}
+ 
+testiDots.forEach(d => d.addEventListener('click', () => scrollToCard(+d.dataset.i)));
+ 
+let autoplay = setInterval(() => scrollToCard((currentCard + 1) % testiDots.length), 5000);
+ 
+testiScroll.addEventListener('touchstart', () => clearInterval(autoplay), { passive: true });
+testiScroll.addEventListener('scroll', () => {
+  if (!testiTrack.children[0]) return;
+  const w = testiTrack.children[0].offsetWidth + 20;
+  const i = Math.min(Math.round(testiScroll.scrollLeft / w), testiDots.length - 1);
+  if (i !== currentCard) {
+    testiDots.forEach(d => d.classList.remove('active'));
+    if (testiDots[i]) testiDots[i].classList.add('active');
+    currentCard = i;
+  }
+}, { passive: true });
+ 
+// ── Contact form ─────────────────────────────────────────────────────────
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Message sent ✓';
+  btn.style.background = 'var(--sage)';
+  btn.disabled = true;
+}
+</script>
 </body>
 </html>
